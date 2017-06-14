@@ -1,12 +1,10 @@
 class PraiseController < ApplicationController
 
-  before_action :validate_slack_token!
+  before_action :validate_slack_token!, except: :index
   skip_before_action :verify_authenticity_token
 
   def index
-    render json: {
-      praises: Praise.all
-    }.to_json
+    @praises = Praise.all
   end
 
   # receive text payload and parse for user and whatever the comment is
