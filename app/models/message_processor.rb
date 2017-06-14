@@ -9,7 +9,9 @@ class MessageProcessor
 
   def perform
     text_and_users = process_text
-
+    if text_and_users[:slack_user_ids].count == 0
+      return 'You have to give praise to someone!'
+    end
     ApplicationRecord.transaction do
       submitter = User.find_or_create_by(slack_id: submitter_id)
 
@@ -20,7 +22,7 @@ class MessageProcessor
         praise.recipients << PraiseRecipient.create(user: user)
       end
     end
-    return "You praised #{text_and_users[:slack_user_names].join(', ')}"
+    "You praised #{text_and_users[:slack_user_names].join(', ')}"
   end
 
   def process_text
