@@ -1,6 +1,6 @@
 class MessageProcessor
 
-  attr_reader :text, :submitter_id
+  attr_reader :text, :submitter_id, :submitter_username
 
   def initialize(text, submitter_id, submitter_username)
     @text = text
@@ -14,8 +14,8 @@ class MessageProcessor
       return 'You have to give props to someone!'
     end
     ApplicationRecord.transaction do
-      submitter = User.find_or_create_by(slack_id: submitter_id, username: submitter_username)
-
+      submitter = User.create_with(username: submitter_username)
+        .find_or_create_by(slack_id: submitter_id)
       prop = Prop.create(raw_comment: text, comment: text_and_users[:processed_text], user: submitter)
 
       recipients = text_and_users[:slack_user_ids].map do |slack_user_id|
