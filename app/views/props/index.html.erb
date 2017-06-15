@@ -13,7 +13,7 @@
         <td><%= prop.user.full_name %></td>
         <td>
           <% prop.recipients.each do |recipient| %>
-            <span><%= recipient.user.full_name %></span>
+            <span><%= recipient.full_name %></span>
           <% end %>
         </td>
         <td><%= prop.created_at %></td>

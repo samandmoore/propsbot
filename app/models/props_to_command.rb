@@ -15,6 +15,13 @@ class PropsToCommand
     submitter = User.find_or_create_by!(slack_id: data.user)
     recipients = User.find_or_create_all_by_slack_ids(recipient_slack_ids)
 
+    ApplicationRecord.transaction do
+      prop = submitter.props.create!(raw_comment: input, comment: props_string)
+      recipients.each do |recipient|
+        prop.recipients << recipient
+      end
+    end
+
     client.say(channel: data.channel, text: <<~RESULT)
       #{submitter.as_mention} gave props to #{recipients.map(&:as_mention).join(', ')}
 
