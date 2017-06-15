@@ -2,9 +2,10 @@ class MessageProcessor
 
   attr_reader :text, :submitter_id
 
-  def initialize(text, submitter_id)
+  def initialize(text, submitter_id, submitter_username)
     @text = text
     @submitter_id = submitter_id
+    @submitter_username = submitter_username
   end
 
   def perform
@@ -13,7 +14,7 @@ class MessageProcessor
       return 'You have to give praise to someone!'
     end
     ApplicationRecord.transaction do
-      submitter = User.find_or_create_by(slack_id: submitter_id)
+      submitter = User.find_or_create_by(slack_id: submitter_id, username: submitter_username)
 
       praise = Praise.create(raw_comment: text, comment: text_and_users[:processed_text], user: submitter)
 
