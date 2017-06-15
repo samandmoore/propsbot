@@ -1,0 +1,62 @@
+$google-image-width: 382px;
+$google-image-height: 92px;
+$light-grey: grey;
+
+.LoginLayout {
+  display: flex;
+  justify-content: center;
+  padding-top: 6.4rem;
+}
+
+.LoginCard {
+  border: 1px solid $light-grey;
+  text-align: center;
+  padding: 3.2rem 2.4rem;
+
+  &-ctaContainer {
+    height: $google-image-height * .65;
+    width: $google-image-width * .65;
+    margin: 0 auto;
+  }
+
+  &-icon {
+    img {
+      width: $google-image-width * .33;
+    }
+  }
+
+  &-titleContainer {
+    margin-bottom: 1.2rem;
+  }
+
+  &-title {
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+  }
+
+  &-subtitle {
+    text-transform: uppercase;
+  }
+
+  &-cta {
+    margin: 0 auto;
+
+    &--google {
+      // background-image: asset_url('btn_google_signin_dark_normal_web@2x.png');
+      background-size: 100%;
+      display: block;
+      height: 100%;
+      width: 100%;
+
+      &:focus,
+      &:hover {
+        // background-image: asset_url('btn_google_signin_dark_focus_web@2x.png');
+      }
+
+      &.is-disabled {
+        // background-image: asset_url('btn_google_signin_dark_disabled_web@2x.png');
+      }
+    }
+  }
+
+}

@@ -1,7 +1,7 @@
 class PraiseController < ApplicationController
-
   before_action :validate_slack_token!, except: :index
-  skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token, only: :create
+  skip_before_action :authenticate_user!, only: :create
 
   def index
     @praises = Praise.all
@@ -19,7 +19,7 @@ class PraiseController < ApplicationController
   private
 
   def validate_slack_token!
-    head :unauthorized unless params[:token] == ENV['SLACK_TOKEN']
+    head :unauthorized unless params[:token] == ENV['SLACK_SLASH_COMMAND_TOKEN']
   end
 
 end

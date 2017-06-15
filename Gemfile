@@ -4,9 +4,12 @@ gem 'rails', '~> 5.1.1'
 gem 'puma', '~> 3.7'
 gem 'jbuilder', '~> 2.5'
 gem 'pg'
+gem 'sassc-rails'
 gem 'uglifier'
-gem 'dotenv-rails'
+gem 'devise'
+gem 'omniauth-slack'
 gem 'slack-ruby-client'
+gem 'dotenv-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
