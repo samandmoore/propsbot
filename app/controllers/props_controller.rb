@@ -1,4 +1,4 @@
-class PropController < ApplicationController
+class PropsController < ApplicationController
   before_action :validate_slack_token!, except: :index
   skip_before_action :verify_authenticity_token, only: :create
   skip_before_action :authenticate_user!, only: :create
