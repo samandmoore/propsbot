@@ -6,5 +6,5 @@ Devise.setup do |config|
 
   config.timeout_in = 30.minutes
 
-  config.omniauth :slack, ENV['2529038260.197872514549'], ENV['791954a099541bb192bb77cdf6f33b42'], scope: 'identity.basic', name: :sign_in_with_slack
+  config.omniauth :slack, ENV['SLACK_OAUTH_APP_ID'], ENV['SLACK_OAUTH_APP_SECRET'], scope: 'identity.basic'
 end
