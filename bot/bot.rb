@@ -7,7 +7,7 @@ class Bot < SlackRubyBot::Bot
   # command 'hi', 'help', 'about' do
   # end
 
-  match /to (.+) for (.+)/ do |client, data, match|
-    PropsToCommand.new(client, data, match).perform
+  command 'to' do |client, data, match|
+    PropsToCommand.new(client, data, match['expression']).perform
   end
 end

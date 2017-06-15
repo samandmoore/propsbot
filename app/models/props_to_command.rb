@@ -1,15 +1,16 @@
 class PropsToCommand
-  attr_reader :client, :data, :match
+  attr_reader :client, :data, :input
 
-  def initialize(client, data, match)
+  def initialize(client, data, input)
     @client = client
     @data = data
-    @match = match
+    @input = input
   end
 
   def perform
-    user_string = match[1]
-    props_string = match[2]
+    parts = input.sub(/ for /, '##SPLIT##').match /(.+)##SPLIT##(.+)/
+    user_string = parts[1]
+    props_string = parts[2]
     recipient_slack_ids = user_string.scan(/<@(?<value>.*?)>/).map(&:first)
     submitter = User.find_or_create_by!(slack_id: data.user)
     recipients = User.find_or_create_all_by_slack_ids(recipient_slack_ids)
