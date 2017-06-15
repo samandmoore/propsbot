@@ -10,9 +10,11 @@ class MessageProcessor
 
   def perform
     text_and_users = process_text
+
     if text_and_users[:slack_ids_and_usernames].count == 0
       return 'You have to give props to someone!'
     end
+
     ApplicationRecord.transaction do
       submitter = User.create_with(slack_user: submitter_username)
         .find_or_create_by(slack_id: submitter_id)
@@ -24,14 +26,9 @@ class MessageProcessor
         prop.recipients << PropRecipient.create(user: user)
       end
     end
-    final_string = "You gave props to "
-    text_and_users[:slack_ids_and_usernames].each_with_index do |id_and_username, index|
-      final_string << "#{id_and_username[:username]}"
-      if index != text_and_users[:slack_ids_and_usernames].count - 1
-        final_string << ", "
-      end
-    end
-    final_string
+
+    propsed_usernames = text_and_users[:slack_ids_and_usernames].map { |t| t[:username] }.join(", ")
+    "You gave props to #{propsed_usernames}"
   end
 
   def process_text
