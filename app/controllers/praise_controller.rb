@@ -9,7 +9,7 @@ class PraiseController < ApplicationController
 
   # receive text payload and parse for user and whatever the comment is
   def create
-    message_processor = MessageProcessor.new(params[:text], params[:user_id])
+    message_processor = MessageProcessor.new(params[:text], params[:user_id], params[:user_name])
 
     render json: {
       text: message_processor.perform
