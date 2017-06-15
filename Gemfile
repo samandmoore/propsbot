@@ -5,6 +5,8 @@ gem 'puma', '~> 3.7'
 gem 'jbuilder', '~> 2.5'
 gem 'pg'
 gem 'uglifier'
+gem 'dotenv-rails'
+gem 'slack-ruby-client'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
