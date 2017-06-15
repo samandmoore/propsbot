@@ -9,6 +9,7 @@ class PropsController < ApplicationController
 
   # receive text payload and parse for user and whatever the comment is
   def create
+    puts params[:user_name]
     message_processor = MessageProcessor.new(params[:text], params[:user_id], params[:user_name])
 
     render json: {

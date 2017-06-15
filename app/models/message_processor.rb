@@ -10,7 +10,7 @@ class MessageProcessor
 
   def perform
     text_and_users = process_text
-    if text_and_users[:slack_user_ids].count == 0
+    if text_and_users[:slack_ids_and_usernames].count == 0
       return 'You have to give props to someone!'
     end
     ApplicationRecord.transaction do
@@ -18,32 +18,37 @@ class MessageProcessor
         .find_or_create_by(slack_id: submitter_id)
       prop = Prop.create(raw_comment: text, comment: text_and_users[:processed_text], user: submitter)
 
-      recipients = text_and_users[:slack_user_ids].map do |slack_user_id|
-        user = User.find_or_create_by(slack_id: slack_user_id)
+      recipients = text_and_users[:slack_ids_and_usernames].map do |slack_ids_and_usernames|
+        user = User.create_with(username: slack_ids_and_usernames[:username])
+          .find_or_create_by(slack_id: slack_ids_and_usernames[:id])
         prop.recipients << PropRecipient.create(user: user)
       end
     end
-    "You gave props to #{text_and_users[:slack_user_names].join(', ')}"
+    final_string = "You gave props to "
+    text_and_users[:slack_ids_and_usernames].each_with_index do |id_and_username, index|
+      final_string << "#{id_and_username[:username]}"
+      if index != text_and_users[:slack_ids_and_usernames].count - 1
+        final_string << ", "
+      end
+    end
+    final_string
   end
 
   def process_text
-    slack_user_ids = []
-    slack_user_names = []
+    slack_ids_and_usernames = [];
     processed_text = text.gsub(/<(?<sign>[?@#!]?)(?<value>.*?)>/) do |match|
       sign = $~[:sign]
       value = $~[:value]
       sides = value.split('|', 2)
       case sign
       when '@'
-        slack_user_ids.push(sides[0])
-        slack_user_names.push(sides[1])
+        slack_ids_and_usernames.push(id: sides[0], username: sides[1])
         sides[1]
       end
     end
     {
       processed_text: processed_text,
-      slack_user_ids: slack_user_ids,
-      slack_user_names: slack_user_names
+      slack_ids_and_usernames: slack_ids_and_usernames
     }
   end
 end
