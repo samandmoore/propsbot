@@ -11,19 +11,19 @@ class MessageProcessor
   def perform
     text_and_users = process_text
     if text_and_users[:slack_user_ids].count == 0
-      return 'You have to give praise to someone!'
+      return 'You have to give props to someone!'
     end
     ApplicationRecord.transaction do
       submitter = User.find_or_create_by(slack_id: submitter_id, username: submitter_username)
 
-      praise = Praise.create(raw_comment: text, comment: text_and_users[:processed_text], user: submitter)
+      prop = Prop.create(raw_comment: text, comment: text_and_users[:processed_text], user: submitter)
 
       recipients = text_and_users[:slack_user_ids].map do |slack_user_id|
         user = User.find_or_create_by(slack_id: slack_user_id)
-        praise.recipients << PraiseRecipient.create(user: user)
+        prop.recipients << PropRecipient.create(user: user)
       end
     end
-    "You praised #{text_and_users[:slack_user_names].join(', ')}"
+    "You gave props to #{text_and_users[:slack_user_names].join(', ')}"
   end
 
   def process_text

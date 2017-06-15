@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <tr>
+      <th>Propser</th>
+      <th>Propsee</th>
+      <th>Date of Props</th>
+      <th>Props</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @props.each do |prop| %>
+      <tr>
+        <td><%= prop.user.username %></td>
+        <td>
+          <% prop.recipients.each do |recipient| %>
+            <span><%= recipient.username %></span>
+          <% end %>
+        </td>
+        <td><%= prop.created_at %></td>
+        <td><%= prop.comment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe PraiseRecipient do
+RSpec.describe PropRecipient do
 
 end

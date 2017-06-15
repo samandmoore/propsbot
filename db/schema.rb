@@ -10,27 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615160909) do
+ActiveRecord::Schema.define(version: 20170615175433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "praise_recipients", force: :cascade do |t|
+  create_table "prop_recipients", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "praise_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["praise_id"], name: "index_praise_recipients_on_praise_id"
-    t.index ["user_id"], name: "index_praise_recipients_on_user_id"
+    t.bigint "prop_id"
+    t.index ["prop_id"], name: "index_prop_recipients_on_prop_id"
+    t.index ["user_id"], name: "index_prop_recipients_on_user_id"
   end
 
-  create_table "praises", force: :cascade do |t|
+  create_table "props", force: :cascade do |t|
     t.text "comment"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "raw_comment"
-    t.index ["user_id"], name: "index_praises_on_user_id"
+    t.index ["user_id"], name: "index_props_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

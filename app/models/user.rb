@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   devise :trackable, :omniauthable, :timeoutable, omniauth_providers: [:slack]
 
-  has_many :praises
-  has_many :praise_recipients
+  has_many :props
+  has_many :prop_recipients
 
   validates :slack_id, presence: true
 
