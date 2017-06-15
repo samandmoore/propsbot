@@ -35,7 +35,7 @@ class MessageProcessor
   end
 
   def process_text
-    slack_ids_and_usernames = [];
+    slack_ids_and_usernames = []
     processed_text = text.gsub(/<(?<sign>[?@#!]?)(?<value>.*?)>/) do |match|
       sign = $~[:sign]
       value = $~[:value]
