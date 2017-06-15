@@ -9,4 +9,8 @@ class Bot < SlackRubyBot::Bot
     Rails.cache.write next_id, { text: match['expression'] }
     client.say(channel: data.channel, text: match['expression'])
   end
+
+  # Uncomment the following to disable the default commands
+  # command 'hi', 'help', 'about' do
+  # end
 end
