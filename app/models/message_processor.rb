@@ -15,7 +15,7 @@ class MessageProcessor
     ApplicationRecord.transaction do
       submitter = User.find_or_create_by(slack_id: submitter_id)
 
-      praise = Praise.create(comment: text_and_users[:processed_text], user: submitter)
+      praise = Praise.create(raw_comment: text, comment: text_and_users[:processed_text], user: submitter)
 
       recipients = text_and_users[:slack_user_ids].map do |slack_user_id|
         user = User.find_or_create_by(slack_id: slack_user_id)
