@@ -1,13 +1,22 @@
-class PropsToCommand
-  attr_reader :client, :data, :input
-
-  def initialize(client, data, input)
-    @client = client
-    @data = data
-    @input = input
+class PropsToCommand < SlackRubyBot::Commands::Base
+  help do
+    title 'to'
+    desc 'Gives props to one or more people for something awesome they did.'
+    long_desc '*Format*' \
+      "\n" \
+      ':props: to <one or more people> for <something awesome>' \
+      "\n\n" \
+      '*Examples*' \
+      "\n" \
+      ':props: to @alexbannon for bringing me into this world' \
+      "\n" \
+      ':props: to @lizderby and @caroline.lydon for the :beers:' \
+      "\n" \
+      "props to @erikahakanson for watching Roland"
   end
 
-  def perform
+  def self.call(client, data, match)
+    input = match[:expression]
     parts = input.sub(/ for /, '##SPLIT##').match /(.+)##SPLIT##(.+)/
     user_string = parts[1]
     props_string = parts[2]

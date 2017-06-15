@@ -8,6 +8,6 @@ class Bot < SlackRubyBot::Bot
   # end
 
   command 'to' do |client, data, match|
-    PropsToCommand.new(client, data, match['expression']).perform
+    PropsToCommand.call client, data, match
   end
 end
