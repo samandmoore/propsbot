@@ -9,6 +9,8 @@ gem 'uglifier'
 gem 'devise'
 gem 'omniauth-slack'
 gem 'slack-ruby-client'
+gem 'slack-ruby-bot'
+gem 'celluloid-io'
 gem 'dotenv-rails'
 
 group :development, :test do
