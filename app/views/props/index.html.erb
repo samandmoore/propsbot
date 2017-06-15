@@ -10,10 +10,10 @@
   <tbody>
     <% @props.each do |prop| %>
       <tr>
-        <td><%= prop.user.username %></td>
+        <td><%= prop.user.slack_user %></td>
         <td>
           <% prop.recipients.each do |recipient| %>
-            <span><%= recipient.user.username %></span>
+            <span><%= recipient.user.slack_user %></span>
           <% end %>
         </td>
         <td><%= prop.created_at %></td>

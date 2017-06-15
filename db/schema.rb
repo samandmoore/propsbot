@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615175433) do
+ActiveRecord::Schema.define(version: 20170615202906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,17 +34,16 @@ ActiveRecord::Schema.define(version: 20170615175433) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "slack_id"
+    t.string "slack_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "username"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
     t.string "full_name"
-    t.string "slack_user"
+    t.string "slack_user", null: false
     t.index ["slack_id"], name: "index_users_on_slack_id", unique: true
     t.index ["slack_user"], name: "index_users_on_slack_user", unique: true
   end

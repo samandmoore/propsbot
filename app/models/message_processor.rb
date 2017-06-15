@@ -14,12 +14,12 @@ class MessageProcessor
       return 'You have to give props to someone!'
     end
     ApplicationRecord.transaction do
-      submitter = User.create_with(username: submitter_username)
+      submitter = User.create_with(slack_user: submitter_username)
         .find_or_create_by(slack_id: submitter_id)
       prop = Prop.create(raw_comment: text, comment: text_and_users[:processed_text], user: submitter)
 
       recipients = text_and_users[:slack_ids_and_usernames].map do |slack_ids_and_usernames|
-        user = User.create_with(username: slack_ids_and_usernames[:username])
+        user = User.create_with(slack_user: slack_ids_and_usernames[:username])
           .find_or_create_by(slack_id: slack_ids_and_usernames[:id])
         prop.recipients << PropRecipient.create(user: user)
       end

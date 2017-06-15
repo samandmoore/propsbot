@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :props
   has_many :prop_recipients
 
-  validates :slack_id, :username, presence: true
+  validates :slack_id, :slack_user, presence: true
 
   def self.from_omniauth(auth)
     user = find_or_initialize_by(slack_id: auth.info.user_id)
