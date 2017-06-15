@@ -1,0 +1,13 @@
+<div class="LoginLayout">
+  <div class="LoginCard">
+    <div class="LoginCard-icon">
+      <%# <%= image_tag("logo.png", alt: "Propsbot", class: 'LoginBox-logo') %1> %>
+    </div>
+    <div class="LoginCard-titleContainer">
+      <h1 class="LoginCard-title">Propsbot</h1>
+    </div>
+    <div class="LoginCard-ctaContainer">
+      <%= link_to "Log in with Slack", user_slack_omniauth_authorize_path, title: "Log in with Slack", class: "LoginCard-cta LoginCard-cta--slack" %>
+    </div>
+  </div>
+</div>
