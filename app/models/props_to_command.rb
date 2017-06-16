@@ -36,7 +36,7 @@ class PropsToCommand < SlackRubyBot::Commands::Base
 
       > #{props_string}
 
-      :dancing_penguin: :dancing_penguin: :dancing_penguin:
+      #{Emoji.random}
     RESULT
   end
 end
