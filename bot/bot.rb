@@ -20,7 +20,7 @@ class Bot < SlackRubyBot::Bot
 
     user_results = leading_users.map do |prop_user|
       user = prop_user.user
-      "*#{user.full_name}* has given #{prop_user.props_count} #{"prop".pluralize(prop_user.props_count)}"
+      "_#{user.full_name}_ has given #{prop_user.props_count} #{"prop".pluralize(prop_user.props_count)}"
     end
 
     client.web_client.chat_postMessage(channel: data.channel, text: <<~RESULT, as_user: true)
