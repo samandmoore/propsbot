@@ -3,7 +3,7 @@
     <tr>
     <td width="200">
       <div class="logo" >
-        <img alt="PropsBot" src="http://better-props.herokuapp.com/propsbot_logo.png" />
+        <%= image_tag("props-logo.png", alt: "Propsbot Logo") %>
       </div>
     </td>
     <td class="padding-sides">
@@ -25,9 +25,7 @@
         </div>
       </td>
       <td>
-          <!-- This is the arrow image -->
-          <img height="10px" align="center" src="http://www.clker.com/cliparts/7/v/E/g/C/H/play-arrow-gray-md.png" />
-        </div>
+        <%= image_tag("arrow.png", alt: "Arrow", class: 'right-arrow') %>
       </td>
       <td class="padding-right">
         <% prop.recipients.each_with_index do |recipient, index| %>
