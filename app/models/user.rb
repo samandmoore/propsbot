@@ -9,6 +9,7 @@ class User < ApplicationRecord
   delegate :full_name, :username, :as_mention, :avatar_url, to: :slack_user
 
   def self.from_omniauth(auth)
+    puts auth.inspect
     find_or_create_by!(slack_id: auth.info.user_id)
   end
 
