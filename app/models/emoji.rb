@@ -31,7 +31,7 @@ class Emoji
     :heart_eyes_cat:
   ).freeze
 
-  def random(count: 3)
+  def self.random(count: 3)
     POSITIVE_EMOJI.sample(3).join(' ')
   end
 end
