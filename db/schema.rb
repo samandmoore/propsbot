@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615225312) do
+ActiveRecord::Schema.define(version: 20170616123655) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "daily_limits", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "date", null: false
+    t.integer "remaining", default: 5, null: false
+    t.index ["date"], name: "index_daily_limits_on_date"
+    t.index ["user_id", "date"], name: "index_daily_limits_on_user_id_and_date", unique: true
+    t.index ["user_id"], name: "index_daily_limits_on_user_id"
+  end
 
   create_table "prop_recipients", force: :cascade do |t|
     t.bigint "user_id"
