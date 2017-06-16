@@ -1,24 +1,59 @@
-<table>
-  <thead>
+<div>
+  <table width="100%">
     <tr>
-      <th>Propser</th>
-      <th>Propsee</th>
-      <th>Date of Props</th>
-      <th>Props</th>
+    <td width="200">
+      <div class="logo" >
+        <img alt="PropsBot" src="http://better-props.herokuapp.com/propsbot_logo.png" />
+      </div>
+    </td>
+    <td class="padding-sides">
+      <h1 class="hello-align">Recent Props</h1>
+    </td>
     </tr>
-  </thead>
-  <tbody>
-    <% @props.each do |prop| %>
-      <tr>
-        <td><%= prop.user.full_name %></td>
-        <td>
-          <% prop.recipients.each do |recipient| %>
-            <span><%= recipient.full_name %></span>
-          <% end %>
+  </table>
+</div>
+
+<% @props.each do |prop| %>
+  <!-- Props -->
+  <!-- props block -->
+  <table class="message padding-sides">
+    <tr>
+      <td>
+        <div class="image-cropper">
+          <!-- This is the sender image -->
+          <%= image_tag prop.user.avatar_url %>
+        </div>
+      </td>
+      <td>
+          <!-- This is the arrow image -->
+          <img height="10px" align="center" src="http://www.clker.com/cliparts/7/v/E/g/C/H/play-arrow-gray-md.png" />
+        </div>
+      </td>
+      <td class="padding-right">
+        <% prop.recipients.each_with_index do |recipient, index| %>
+          <div class="image-cropper recipient-<%=index%>">
+            <!-- This is the receiver image -->
+            <%= image_tag recipient.avatar_url %>
+          </div>
+        <% end %>
+      </td>
+      <% if prop.recipients.count > 1 %>
+        <td class="multi-user-thread">
+          <p class="gray-text"><%= prop.comment %></p>
         </td>
-        <td><%= prop.created_at %></td>
-        <td><%= prop.comment %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <% else %>
+        <td>
+          <p class="gray-text"><%= prop.comment %></p>
+        </td>
+      <% end %>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td>
+        <p class="time-text"><%= prop.created_at.strftime("%B %d, %Y %I:%M %p") %></p>
+      </td>
+    </tr>
+  </table>
+<% end %>

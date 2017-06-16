@@ -32,7 +32,7 @@ class PropsToCommand < SlackRubyBot::Commands::Base
     end
 
     client.say(channel: data.channel, text: <<~RESULT)
-      #{submitter.as_mention} gave props to #{recipients.map(&:as_mention).join(', ')}
+      #{submitter.full_name} gave props to #{recipients.map(&:full_name).join(', ')}
 
       > #{props_string}
 

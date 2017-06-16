@@ -5,6 +5,7 @@ class PropsController < ApplicationController
 
   def index
     @props = Prop.all
+    @options = ['All Props', 'Props From Me', 'Props For Me']
   end
 
   # receive text payload and parse for user and whatever the comment is

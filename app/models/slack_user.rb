@@ -13,6 +13,10 @@ class SlackUser
     raw_slack_user.user.name
   end
 
+  def avatar_url
+    raw_slack_user.user.profile.image_512
+  end
+
   def as_mention
     "<@#{slack_user_id}>"
   end
