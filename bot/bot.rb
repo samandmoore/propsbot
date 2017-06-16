@@ -25,7 +25,7 @@ class Bot < SlackRubyBot::Bot
 
     client.web_client.chat_postMessage(channel: data.channel, text: <<~RESULT, as_user: true)
       *Leaderboard*
-      #{user_results.join('\n')}
+      #{user_results.join("\n")}
     RESULT
   end
 end
