@@ -4,7 +4,7 @@ class PropsController < ApplicationController
   skip_before_action :authenticate_user!, only: :create
 
   def index
-    @props = Prop.all
+    @props = Prop.all.order(created_at: :desc)
     @options = ['All Props', 'Props From Me', 'Props For Me']
   end
 
