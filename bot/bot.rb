@@ -18,10 +18,14 @@ class Bot < SlackRubyBot::Bot
       .order('props_count desc')
       .limit(10)
 
-    leading_users.map do |
+    user_results = leading_users.map do |prop_user|
+      user = prop_user.user
+      "*#{user.full_name}* has given #{prop_user.props_count} #{"prop".pluralize(prop_user.props_count)}"
+    end
 
-    client.web_client.chat_postMessage(channel: data.channel, text: <<~RESULT)
+    client.web_client.chat_postMessage(channel: data.channel, text: <<~RESULT, as_user: true)
       *Leaderboard*
+      #{user_results.join('\n')}
     RESULT
   end
 end
