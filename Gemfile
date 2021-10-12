@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 5.1.1'
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 5.5'
 gem 'jbuilder', '~> 2.5'
 gem 'pg'
 gem 'sassc-rails'
